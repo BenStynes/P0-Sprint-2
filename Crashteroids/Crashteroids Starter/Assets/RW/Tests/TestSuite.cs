@@ -92,10 +92,11 @@ public class TestSuite
     [UnityTest]
     public IEnumerator PlayerMovesCorrect()
     {
-       
+
         float initialXPos = game.GetShip().transform.position.x;
         game.GetShip().MoveRight();
         yield return new WaitForSeconds(0.1f);
+
 
         Assert.Greater(game.GetShip().transform.position.x, initialXPos);
         initialXPos = game.GetShip().transform.position.x;
@@ -103,5 +104,17 @@ public class TestSuite
         yield return new WaitForSeconds(0.1f);
 
         Assert.Less(game.GetShip().transform.position.x, initialXPos);
+    }
+
+    [UnityTest]
+    public IEnumerator ScoreReset()
+    {
+        //1
+        game.isGameOver = true;
+        game.NewGame();
+        //2
+        Assert.AreEqual(game.score, 0);
+        yield return null;
+
     }
 }
