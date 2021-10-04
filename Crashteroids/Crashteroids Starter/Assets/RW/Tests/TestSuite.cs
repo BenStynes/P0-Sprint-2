@@ -117,4 +117,20 @@ public class TestSuite
         yield return null;
 
     }
+
+    [UnityTest]
+    public IEnumerator AllAsteroidsCauseGameOverOnCollision()
+    {
+        for(int i = 0; i < 5; i++)
+        {
+            GameObject asteroid = game.GetSpawner().SpawnAsteroid();
+            asteroid.transform.position = game.GetShip().transform.position;
+            yield return new WaitForSeconds(0.1f);
+
+            Assert.True(game.isGameOver);
+
+            if(i < 4)
+                game.NewGame();
+        }
+    }
 }
