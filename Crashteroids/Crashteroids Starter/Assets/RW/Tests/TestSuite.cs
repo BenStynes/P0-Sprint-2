@@ -90,4 +90,14 @@ public class TestSuite
         Assert.AreEqual(game.score, 1);
     }
 
+    [UnityTest]
+    public IEnumerator ScoreReset()
+    {
+        //1
+        game.isGameOver = true;
+        game.NewGame();
+        //2
+        Assert.AreEqual(game.score, 0);
+        yield return null;
+    }
 }
